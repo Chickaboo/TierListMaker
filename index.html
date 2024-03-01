@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -425,6 +424,34 @@
                 text-align: center;
             }
         }
+
+        .editable-title-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+
+        .editable-title {
+            border: none;
+            background: transparent;
+            font-size: 24px;
+            color: #fff;
+            outline: none;
+            text-align: center;
+            transition: border-color 0.3s, box-shadow 0.3s;
+            cursor: pointer;
+            padding: 5px;
+            border-bottom: 2px solid transparent;
+            /* Add bottom border */
+        }
+
+        .editable-title:focus {
+            border-color: #ffffff;
+            /* Change border color when focused */
+            box-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
+            /* Add box shadow when focused */
+        }
     </style>
 </head>
 
@@ -452,7 +479,7 @@
         <button id="save-btn" class="toolbar-button">
             <i class="fas fa-save"></i> Save
         </button>
-        <a href="https://github.com/Chickaboo/CTF-Tier-List-Maker" target="_blank" class="toolbar-button">
+        <a href="https://github.com/Chickaboo/TierListMaker" target="_blank" class="toolbar-button">
             <i class="fab fa-github"></i> GitHub
         </a>
     </div>
@@ -469,6 +496,10 @@
         </div>
         <br>
         <div class="tier-list-container" id="tier-list-container">
+            <div class="editable-title-container">
+                <input type="text" id="tier-list-title" class="editable-title" value="Your Tier List Title"
+                    spellcheck="false">
+            </div>
             <!-- Oval container (included in the tier list) -->
             <div class="tier oval-container" id="oval-container">
                 <div class="oval-icon">
@@ -518,6 +549,14 @@
                     const loadButton = document.getElementById('load-btn');
                     const saveButton = document.getElementById('save-btn');
                     const loadTierListButton = document.getElementById('load-tier-list-btn');
+                    const tierListTitle = document.getElementById('tier-list-title');
+
+                    // Add event listener to handle title editing
+                    tierListTitle.addEventListener('input', function () {
+                        // Update the tier list title
+                        document.querySelector('.editable-title').textContent = this.value;
+                    });
+
                     menu.addEventListener('click', (e) => {
                         const clickedMenuItem = e.target;
                         if (clickedMenuItem.classList.contains('menu-item')) {
@@ -598,6 +637,7 @@
                         }
                     });
                 });
+
             </script>
 </body>
 
